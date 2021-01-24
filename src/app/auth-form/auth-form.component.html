@@ -1,0 +1,16 @@
+<div>
+  <form (ngSubmit)="onSubmit(form.value)" #form>
+    <h3>{{ title }}</h3>
+    <label>
+      Email address
+      <input type="email" name="email" ngModel #email>
+    </label>
+    <label>
+      Password
+      <input type="password" name="password" ngModel>
+    </label>
+    <button type="submit">
+      {{ title }}
+    </button>
+  </form>
+</div>

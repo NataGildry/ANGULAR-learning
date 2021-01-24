@@ -1,4 +1,6 @@
 <div>
+  <button (click)="moveComponent()">Move</button>
   <button (click)="destroyComponent()">Destroy</button>
   <div #entry></div>
+  <ng-template #tmpl let-name let-location="location">{{ name }} : {{ location }}</ng-template>
 </div>

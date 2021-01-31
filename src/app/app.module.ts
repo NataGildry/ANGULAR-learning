@@ -5,13 +5,15 @@ import {AppComponent} from './app.component';
 import {ExampleThreeComponent} from './example-three/example-three.component';
 import { ExampleTwoComponent } from './example-two/example-two.component';
 import { ExampleOneComponent } from './example-one/example-one.component';
+import { CreditCardDirective } from './credit-card.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     ExampleThreeComponent,
     ExampleTwoComponent,
-    ExampleOneComponent
+    ExampleOneComponent,
+    CreditCardDirective
   ],
   imports: [
     BrowserModule

@@ -18,6 +18,10 @@ import { User } from './auth-form/user';
 })
 export class AppComponent implements AfterViewInit, AfterContentInit {
   component: ComponentRef<AuthFormComponent>;
+  ctx = {
+    $implicit: 'Tom Hard',
+    location: 'England, En'
+  }
   @ViewChild('tmpl') template: TemplateRef<any>;
   @ViewChild('entry', {read: ViewContainerRef}) entry: ViewContainerRef;
 

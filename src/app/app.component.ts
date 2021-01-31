@@ -24,8 +24,24 @@ export class AppComponent implements AfterViewInit, AfterContentInit {
   };
   @ViewChild('tmpl') template: TemplateRef<any>;
   @ViewChild('entry', {read: ViewContainerRef}) entry: ViewContainerRef;
-
-  constructor( private resolver: ComponentFactoryResolver ) {}
+  items = [{
+    name: 'Mark Hoppus',
+    age: 44,
+    location: 'California'
+  }, {
+    name: 'Tom Delonge',
+    age: 41,
+    location: 'California'
+  }, {
+    name: 'Travis Barker',
+    age: 41,
+    location: 'California'
+  }];
+  constructor( private resolver: ComponentFactoryResolver ) {
+    setTimeout(() => {
+      this.items = [...this.items, { name: 'Nata Gildry', age: 40, location: 'Dnipro' }];
+    }, 2000);
+  }
 
   ngAfterContentInit(): void {
     setTimeout(() => {

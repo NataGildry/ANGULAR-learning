@@ -22,4 +22,16 @@
         appCreditCard>
     </label>
   </div>
+  <div>
+    <ul>
+      <li *appMyFor="let item of items; let i = index;">
+        {{ i }} Member: {{ item.name | json }}
+      </li>
+      <ng-template appMyFor [appMyForOf]="items" let-item let-i="index">
+        <li>
+          {{ i }} Member: {{ item.name | json }}
+        </li>
+      </ng-template>
+    </ul>
+  </div>
 </div>

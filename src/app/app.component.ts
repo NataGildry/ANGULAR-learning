@@ -3,7 +3,7 @@ import {
   AfterViewInit,
   Component,
   ComponentFactoryResolver,
-  ComponentRef,
+  ComponentRef, OnInit,
   TemplateRef,
   ViewChild,
   ViewContainerRef
@@ -11,12 +11,19 @@ import {
 import { AuthFormComponent } from './auth-form/auth-form.component';
 import { User } from './auth-form/user';
 
+interface File {
+  name: string;
+  size: number;
+  type: string;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewInit, AfterContentInit {
+export class AppComponent implements OnInit, AfterViewInit, AfterContentInit {
+  files: File[];
   component: ComponentRef<AuthFormComponent>;
   ctx = {
     $implicit: 'Tom Hard',
@@ -41,6 +48,13 @@ export class AppComponent implements AfterViewInit, AfterContentInit {
     setTimeout(() => {
       this.items = [...this.items, { name: 'Nata Gildry', age: 40, location: 'Dnipro' }];
     }, 2000);
+  }
+  ngOnInit(): void {
+    this.files = [
+      { name: 'logo.svg', size: 2120109, type: 'image/svg' },
+      { name: 'banner.jpg', size: 18029, type: 'image/jpg' },
+      { name: 'background.png', size: 1784562, type: 'image/png' }
+    ];
   }
 
   ngAfterContentInit(): void {

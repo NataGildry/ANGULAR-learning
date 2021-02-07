@@ -36,9 +36,9 @@
   </div>
   <div>
     <h3>Example with custom pipe</h3>
-    <div *ngFor="let file of files">
+    <div *ngFor="let file of mapped">
       <p>{{ file.name }}</p>
-      <p>{{ file.size | filesize }}</p>
+      <p>{{ file.size }}</p>
     </div>
   </div>
 </div>

@@ -10,20 +10,25 @@ import {
 } from '@angular/core';
 import { AuthFormComponent } from './auth-form/auth-form.component';
 import { User } from './auth-form/user';
+import { FileSizePipe } from './filesize.pipe';
 
 interface File {
   name: string;
-  size: number;
+  size: any;
   type: string;
 }
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [
+  FileSizePipe
+]
 })
 export class AppComponent implements OnInit, AfterViewInit, AfterContentInit {
   files: File[];
+  mapped: File[];
   component: ComponentRef<AuthFormComponent>;
   ctx = {
     $implicit: 'Tom Hard',
@@ -44,7 +49,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterContentInit {
     age: 41,
     location: 'California'
   }];
-  constructor( private resolver: ComponentFactoryResolver ) {
+  constructor( private resolver: ComponentFactoryResolver,
+               private fileSizePipe: FileSizePipe) {
     setTimeout(() => {
       this.items = [...this.items, { name: 'Nata Gildry', age: 40, location: 'Dnipro' }];
     }, 2000);
@@ -55,6 +61,13 @@ export class AppComponent implements OnInit, AfterViewInit, AfterContentInit {
       { name: 'banner.jpg', size: 18029, type: 'image/jpg' },
       { name: 'background.png', size: 1784562, type: 'image/png' }
     ];
+    this.mapped = this.files.map(file => {
+      return {
+        name: file.name,
+        type: file.type,
+        size: this.fileSizePipe.transform(file.size, 'mb')
+      };
+    });
   }
 
   ngAfterContentInit(): void {

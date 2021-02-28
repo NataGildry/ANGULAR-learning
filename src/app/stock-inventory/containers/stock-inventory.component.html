@@ -4,10 +4,13 @@
       [parent]="form">
     </app-stock-branch>
     <app-stock-selector
-      [parent]="form">
+      [products]="products"
+      [parent]="form"
+      (added)="addStock($event)">
     </app-stock-selector>
     <app-stock-products
-      [parent]="form">
+      [parent]="form"
+      (removed)="removeStock($event)">
     </app-stock-products>
     <div class="stock-inventory__buttons">
       <button

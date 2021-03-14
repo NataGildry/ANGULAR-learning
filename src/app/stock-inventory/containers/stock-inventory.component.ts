@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import { Product } from '../models/product';
 
@@ -7,8 +7,8 @@ import { Product } from '../models/product';
   templateUrl: './stock-inventory.component.html',
   styleUrls: ['./stock-inventory.component.css']
 })
-export class StockInventoryComponent  {
-
+export class StockInventoryComponent implements OnInit {
+  total: number;
   products: Product[] = [
     { id: 1, price: 2800, name: 'MacBook Pro' },
     { id: 2, price: 50, name: 'USB-C Adaptor' },
@@ -27,9 +27,13 @@ export class StockInventoryComponent  {
       this.createStock({ product_id: 1, quantity: 10 }),
       this.createStock({ product_id: 3, quantity: 50 }),
     ])
-  })
+  });
 
   constructor(private fb: FormBuilder) {}
+  ngOnInit(): void {
+    this.form.get('stock')
+      .valueChanges.subscribe(value => console.log(value));
+  }
 
   createStock(stock): FormGroup {
     return new FormGroup({

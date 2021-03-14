@@ -7,6 +7,12 @@
         <div class="stock-product__name">
           {{ item.value.product_id }}
         </div>
+        <div class="stock-product__name">
+          {{ item.value.product_id.name }}
+        </div>
+        <div class="stock-product__price">
+          {{ item.value.product_id.price | currency:'USD':true }}
+        </div>
         <input
           type="number"
           step="10"

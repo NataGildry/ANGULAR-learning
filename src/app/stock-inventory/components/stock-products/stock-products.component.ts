@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
+import { Product } from '../../models/product';
 
 @Component({
   selector: 'app-stock-products',
@@ -9,6 +10,9 @@ import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
 export class StockProductsComponent {
   @Input()
   parent: FormGroup;
+
+  @Input()
+  map: Product[];
 
   @Output()
   removed = new EventEmitter<any>();

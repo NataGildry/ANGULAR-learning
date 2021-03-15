@@ -28,7 +28,7 @@ export class StockInventoryComponent implements OnInit {
       this.createStock({ product_id: 1, quantity: 10 }),
       this.createStock({ product_id: 3, quantity: 50 }),
     ])
-  });
+  }, { validator: StockValidators.checkStockExists });
 
   constructor(private fb: FormBuilder) {}
   ngOnInit(): void {

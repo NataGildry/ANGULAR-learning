@@ -15,8 +15,14 @@
       formControlName="quantity">
     </app-stock-counter>
     <button type="button"
-            (click)="onAdd()">
+            (click)="onAdd()"
+            [disabled]="stockExists || notSelected">
       Add stock
     </button>
+    <div
+      class="stock-selector__error"
+      *ngIf="stockExists">
+      Item already exists in the stock
+    </div>
   </div>
 </div>

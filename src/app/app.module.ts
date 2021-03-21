@@ -11,7 +11,12 @@ import { CreditCardDirective } from './credit-card.directive';
 import { MyForDirective } from './my-for.directive';
 
 import { FileSizePipe } from './filesize.pipe';
+import { RouterModule, Routes } from '@angular/router';
+import { MailModule } from './mail/mail.module';
 
+export const ROUTES: Routes = [
+  { path: '**', redirectTo: 'folder/inbox' }
+];
 
 @NgModule({
   declarations: [
@@ -25,7 +30,9 @@ import { FileSizePipe } from './filesize.pipe';
   ],
   imports: [
     BrowserModule,
-    StockInventoryModule
+    StockInventoryModule,
+    MailModule,
+    RouterModule.forRoot(ROUTES, { enableTracing: true })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -11,6 +11,7 @@ import {
 import { AuthFormComponent } from './auth-form/auth-form.component';
 import { User } from './auth-form/user';
 import { FileSizePipe } from './filesize.pipe';
+import { Router } from '@angular/router';
 
 interface File {
   name: string;
@@ -50,7 +51,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterContentInit {
     location: 'California'
   }];
   constructor( private resolver: ComponentFactoryResolver,
-               private fileSizePipe: FileSizePipe) {
+               private fileSizePipe: FileSizePipe,
+               private router: Router) {
     setTimeout(() => {
       this.items = [...this.items, { name: 'Nata Gildry', age: 40, location: 'Dnipro' }];
     }, 2000);

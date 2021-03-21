@@ -12,4 +12,10 @@ export class MailAppComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onActivate(event): void {
+    console.log('Activate:', event);
+  }
+  onDeactivate(event): void {
+    console.log('Deactivate:', event);
+  }
 }

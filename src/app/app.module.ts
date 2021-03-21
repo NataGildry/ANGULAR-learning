@@ -32,7 +32,7 @@ export const ROUTES: Routes = [
     BrowserModule,
     StockInventoryModule,
     MailModule,
-    RouterModule.forRoot(ROUTES, { enableTracing: true })
+    RouterModule.forRoot(ROUTES)
   ],
   providers: [],
   bootstrap: [AppComponent]

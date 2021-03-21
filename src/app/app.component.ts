@@ -11,7 +11,8 @@ import {
 import { AuthFormComponent } from './auth-form/auth-form.component';
 import { User } from './auth-form/user';
 import { FileSizePipe } from './filesize.pipe';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 interface File {
   name: string;
@@ -70,6 +71,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterContentInit {
         size: this.fileSizePipe.transform(file.size, 'mb')
       };
     });
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(event => {
+        console.log(event);
+      });
   }
 
   ngAfterContentInit(): void {

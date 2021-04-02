@@ -25,8 +25,8 @@ interface File {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   providers: [
-  FileSizePipe
-]
+    FileSizePipe
+  ]
 })
 export class AppComponent implements OnInit, AfterViewInit, AfterContentInit {
   files: File[];
@@ -51,18 +51,20 @@ export class AppComponent implements OnInit, AfterViewInit, AfterContentInit {
     age: 41,
     location: 'California'
   }];
-  constructor( private resolver: ComponentFactoryResolver,
-               private fileSizePipe: FileSizePipe,
-               private router: Router) {
+
+  constructor(private resolver: ComponentFactoryResolver,
+              private fileSizePipe: FileSizePipe,
+              private router: Router) {
     setTimeout(() => {
-      this.items = [...this.items, { name: 'Nata Gildry', age: 40, location: 'Dnipro' }];
+      this.items = [...this.items, {name: 'Nata Gildry', age: 40, location: 'Dnipro'}];
     }, 2000);
   }
+
   ngOnInit(): void {
     this.files = [
-      { name: 'logo.svg', size: 2120109, type: 'image/svg' },
-      { name: 'banner.jpg', size: 18029, type: 'image/jpg' },
-      { name: 'background.png', size: 1784562, type: 'image/png' }
+      {name: 'logo.svg', size: 2120109, type: 'image/svg'},
+      {name: 'banner.jpg', size: 18029, type: 'image/jpg'},
+      {name: 'background.png', size: 1784562, type: 'image/png'}
     ];
     this.mapped = this.files.map(file => {
       return {
@@ -89,11 +91,11 @@ export class AppComponent implements OnInit, AfterViewInit, AfterContentInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-    this.entry.createEmbeddedView(this.template, {
-      $implicit: 'Nata Gildry',
-      location: 'Ukraine, UA'
+      this.entry.createEmbeddedView(this.template, {
+        $implicit: 'Nata Gildry',
+        location: 'Ukraine, UA'
+      });
     });
-  });
   }
 
   loginUser(user: User): void {

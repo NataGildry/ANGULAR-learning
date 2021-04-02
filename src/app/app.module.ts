@@ -13,6 +13,7 @@ import { MyForDirective } from './my-for.directive';
 import { FileSizePipe } from './filesize.pipe';
 import { RouterModule, Routes } from '@angular/router';
 import { MailModule } from './mail/mail.module';
+import { HttpClientModule } from '@angular/common/http';
 
 export const ROUTES: Routes = [
   { path: '**', redirectTo: 'folder/inbox' }
@@ -31,6 +32,7 @@ export const ROUTES: Routes = [
   imports: [
     BrowserModule,
     StockInventoryModule,
+    HttpClientModule,
     MailModule,
     RouterModule.forRoot(ROUTES)
   ],

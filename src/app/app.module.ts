@@ -16,6 +16,8 @@ import { MailModule } from './mail/mail.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { Observable, of } from 'rxjs';
+import { AuthModule } from './auth/auth.module';
+import { AuthGuard } from './auth/auth.guard';
 
 export class CustomPreload implements PreloadingStrategy {
   preload(route: Route, fn: () => Observable<any>): Observable<any> {
@@ -24,7 +26,7 @@ export class CustomPreload implements PreloadingStrategy {
 }
 
 export const ROUTES: Routes = [
-  { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
+  { path: 'dashboard', canLoad: [AuthGuard], loadChildren: './dashboard/dashboard.module#DashboardModule' },
   { path: '**', redirectTo: 'mail/folder/inbox' }
 ];
 
@@ -43,6 +45,7 @@ export const ROUTES: Routes = [
     StockInventoryModule,
     HttpClientModule,
     MailModule,
+    AuthModule,
     DashboardModule,
     RouterModule.forRoot(ROUTES, { preloadingStrategy: CustomPreload })
   ],

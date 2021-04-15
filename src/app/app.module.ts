@@ -11,10 +11,17 @@ import { CreditCardDirective } from './credit-card.directive';
 import { MyForDirective } from './my-for.directive';
 
 import { FileSizePipe } from './filesize.pipe';
-import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
+import { PreloadingStrategy, Route, RouterModule, Routes } from '@angular/router';
 import { MailModule } from './mail/mail.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { Observable, of } from 'rxjs';
+
+export class CustomPreload implements PreloadingStrategy {
+  preload(route: Route, fn: () => Observable<any>): Observable<any> {
+    return route.data && route.data.preload ? fn() : of(null);
+  }
+}
 
 export const ROUTES: Routes = [
   { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
@@ -37,9 +44,9 @@ export const ROUTES: Routes = [
     HttpClientModule,
     MailModule,
     DashboardModule,
-    RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES, { preloadingStrategy: CustomPreload })
   ],
-  providers: [],
+  providers: [CustomPreload],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

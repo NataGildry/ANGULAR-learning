@@ -74,9 +74,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterContentInit {
       };
     });
     this.router.events.pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(event => {
-        console.log(event);
-      });
+      .subscribe(event => {});
   }
 
   ngAfterContentInit(): void {

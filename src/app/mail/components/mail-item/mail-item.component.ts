@@ -1,19 +1,23 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Mail } from '../../models/mail';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-mail-item',
   templateUrl: './mail-item.component.html',
   styleUrls: ['./mail-item.component.css']
 })
-export class MailItemComponent implements OnInit {
+export class MailItemComponent {
 
   @Input()
   message: Mail;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  ngOnInit(): void {
-  }
+  navigateToMessage(): void {
+    this.router.navigate(
+      ['', {outlets: {pane: ['message', this.message.id]}}]
+    );
+   }
 
 }

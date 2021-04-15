@@ -27,4 +27,17 @@ export class MailService {
       });
     }));
   }
+
+  getMessage(id: string): Observable<Mail> {
+    return this.http
+      .get('assets/messages.json').pipe(map(data => {
+        const key = 'messages';
+        const messageList = data[key];
+        return messageList.filter(
+          message => {
+            // tslint:disable-next-line:triple-equals
+            return message.id == id; }
+        );
+      }));
+  }
 }

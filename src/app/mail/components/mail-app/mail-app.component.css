@@ -8,7 +8,7 @@ nav {
   padding: 20px 0;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
-a {
+nav > a {
   display: block;
   margin-bottom: 10px;
   padding: 10px 30px;
@@ -17,7 +17,7 @@ a {
   font-size: 16px;
   border-left: 3px solid transparent;
 }
-a:active {
+nav > a:active {
    color: rgba(0, 0, 0, 0.8);
    border-left-color: #9f72e6;
    background: rgba(0, 0, 0, 0.03);

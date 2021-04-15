@@ -11,7 +11,7 @@ import { CreditCardDirective } from './credit-card.directive';
 import { MyForDirective } from './my-for.directive';
 
 import { FileSizePipe } from './filesize.pipe';
-import { RouterModule, Routes } from '@angular/router';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import { MailModule } from './mail/mail.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -37,7 +37,7 @@ export const ROUTES: Routes = [
     HttpClientModule,
     MailModule,
     DashboardModule,
-    RouterModule.forRoot(ROUTES),
+    RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules })
   ],
   providers: [],
   bootstrap: [AppComponent]

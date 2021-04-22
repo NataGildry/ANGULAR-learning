@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, CanLoad } from '@angular/router';
+import { CanActivate, CanActivateChild, CanLoad } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Injectable()
-export class AuthGuard implements CanLoad, CanActivate {
+export class AuthGuard implements CanLoad, CanActivate, CanActivateChild {
 
   constructor(private authService: AuthService) {}
 
@@ -14,5 +14,9 @@ export class AuthGuard implements CanLoad, CanActivate {
 
   canActivate(): Observable<boolean> {
     return this.authService.isLoggedIn();
+  }
+
+  canActivateChild(): boolean {
+    return false;
   }
 }

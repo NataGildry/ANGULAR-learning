@@ -1,7 +1,59 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { Component } from '@angular/core';
 import { FileSizePipe } from './filesize.pipe';
 
-
 describe('FileSizePipe', () => {
+
+  describe('Shallow FileSizePipe test', () => {
+
+    @Component({
+      template: `
+        Size: {{ size | filesize:suffix }}
+      `
+    })
+    class TestComponent {
+      suffix;
+      size = 123456789;
+    }
+
+    let component: TestComponent;
+    let fixture: ComponentFixture<TestComponent>;
+    let el: HTMLElement;
+
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          FileSizePipe,
+          TestComponent
+        ]
+      });
+
+      fixture = TestBed.createComponent(TestComponent);
+      component = fixture.componentInstance;
+      el = fixture.nativeElement;
+
+      fixture.detectChanges();
+    });
+
+    it('should convert bytes to megabytes', () => {
+      expect(el.textContent).toContain('Size: 117.74MB');
+      component.size = 1029281;
+      fixture.detectChanges();
+      expect(el.textContent).toContain('Size: 0.98MB');
+    });
+
+    it('should use the default extension when not supplied', () => {
+      expect(el.textContent).toContain('Size: 117.74MB');
+    });
+
+    it('should override the extension when supplied', () => {
+      component.suffix = 'myExt';
+      fixture.detectChanges();
+      expect(el.textContent).toContain('Size: 117.74myExt');
+    });
+
+  });
 
   describe('Isolate FileSizePipe test', () => {
 

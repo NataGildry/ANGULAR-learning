@@ -14,7 +14,6 @@ import { FileSizePipe } from './filesize.pipe';
 import { PreloadingStrategy, Route, RouterModule, Routes } from '@angular/router';
 import { MailModule } from './mail/mail.module';
 import { HttpClientModule } from '@angular/common/http';
-import { DashboardModule } from './dashboard/dashboard.module';
 import { Observable, of } from 'rxjs';
 import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from './auth/auth.guard';
@@ -46,10 +45,8 @@ export const ROUTES: Routes = [
     HttpClientModule,
     MailModule,
     AuthModule,
-    DashboardModule,
-    RouterModule.forRoot(ROUTES, { preloadingStrategy: CustomPreload })
+    RouterModule.forRoot(ROUTES)
   ],
-  providers: [CustomPreload],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

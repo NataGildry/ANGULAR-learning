@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Product } from '../models/product';
 import { StockValidators } from './stock-inventory.validators';
+import { StockInventoryService } from '../services/stock-inventory.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-stock-inventory',
@@ -10,13 +12,7 @@ import { StockValidators } from './stock-inventory.validators';
 })
 export class StockInventoryComponent implements OnInit {
   total: number;
-  products: Product[] = [
-    { id: 1, price: 2800, name: 'MacBook Pro' },
-    { id: 2, price: 50, name: 'USB-C Adaptor' },
-    { id: 3, price: 400, name: 'iPod' },
-    { id: 4, price: 900, name: 'iPhone' },
-    { id: 5, price: 600, name: 'Apple Watch' },
-  ];
+  products: Product[];
 
   form = this.fb.group({
     store: this.fb.group({
@@ -30,10 +26,16 @@ export class StockInventoryComponent implements OnInit {
     ])
   }, { validator: StockValidators.checkStockExists });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private stockService: StockInventoryService) {}
   ngOnInit(): void {
     this.form.get('stock')
       .valueChanges.subscribe(value => console.log(value));
+
+    const cart = this.stockService.getCartItems();
+    const products = this.stockService.getProducts();
+
+    cart.pipe(map(item => this.addStock(item))).subscribe();
+    products.pipe(map(i => i.map(el => this.products.push(el)))).subscribe();
   }
 
   createStock(stock): FormGroup {
